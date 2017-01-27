@@ -28,16 +28,12 @@ class TelegramApiService {
 
         long includingOffset = excludingOffset + 1
 
-        telegram.get({
+        def json = telegram.get() {
             request.uri.path = "/${BOT_PATH}/getUpdates"
             request.uri.query = [ offset: includingOffset ]
+        }
 
-            request.contentType = 'application/json'
-
-            response.parser('application/json') { config, resp ->
-                json(config, resp).json.collect(this.&toTelegramApiUpdate)
-            }
-        })
+        return json.result.collect(this.&toTelegramApiUpdate)
     }
 
     TelegramApiUpdate toTelegramApiUpdate(json) {
@@ -73,7 +69,7 @@ class TelegramApiService {
                 .firstName(json.first_name)
                 .lastName(json.last_name)
                 .username(json.username)
-                .type(jsob.type)
+                .type(json.type)
                 .build()
     }
 
