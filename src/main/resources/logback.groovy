@@ -11,14 +11,14 @@ appender('STDOUT', ConsoleAppender) {
 }
 
 appender('FILE', RollingFileAppender) {
-    file = '/logs/hello-bot.log'
+    file = '/logs/takispravy-telegram-bot.log'
 
     encoder(PatternLayoutEncoder) {
         pattern = '%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n'
     }
 
     rollingPolicy(TimeBasedRollingPolicy) {
-        FileNamePattern = "/logs/hello-bot.%d{yyyy-MM-dd}.log"
+        FileNamePattern = "/logs/takispravy-telegram-bot.%d{yyyy-MM-dd}.log"
     }
 }
 

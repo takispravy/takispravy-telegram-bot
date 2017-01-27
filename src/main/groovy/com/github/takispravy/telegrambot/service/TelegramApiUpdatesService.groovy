@@ -7,6 +7,8 @@ import org.joda.time.format.PeriodFormatter
 import org.joda.time.format.PeriodFormatterBuilder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Scope
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.scheduling.TaskScheduler
 import org.springframework.stereotype.Service
 
@@ -42,7 +44,8 @@ class TelegramApiUpdatesService {
     void scheduleGettingNewUpdates() {
         log.info 'Starting Telegram API updates service...'
 
-        lastIngestedUpdateId = telegramApiUpdateRepository.findMaxUpdateId() ?: 0
+        List<TelegramApiUpdate> latestUpdates = telegramApiUpdateRepository.findAll(new PageRequest(0, 1, new Sort(Sort.Direction.DESC, 'updateId'))).content
+        lastIngestedUpdateId = latestUpdates.empty ? 0 : latestUpdates.first().updateId
         log.info "Last ingested update_id=$lastIngestedUpdateId"
 
         log.info "Scheduling getting new updates with fixed delay ${GET_UPDATES_DELAY}..."
