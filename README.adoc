@@ -1,0 +1,11 @@
+= takispravy-telegram-bot
+
+Interface for interaction with Telegram Bot API.
+
+TravisCI - https://travis-ci.org/takispravy/takispravy-telegram-bot/
+
+DockerHub - https://hub.docker.com/r/takispravy/takispravy-telegram-bot/
+
+== Documentation
+
+link:src/docs/howto-start-docker.adoc[HOWTO: start service as docker container]
