@@ -9,3 +9,5 @@ DockerHub - https://hub.docker.com/r/takispravy/takispravy-telegram-bot/
 == Documentation
 
 link:src/docs/howto-start-docker.adoc[HOWTO: start service as docker container]
+
+link:src/docs/mongodb-setup.adoc[MongoDB setup]

@@ -1,0 +1,41 @@
+= HOWTO: start service as docker container
+
+== Cleaning previosly started container
+
+[source,shell]
+----
+docker ps -a
+docker kill takispravy_telegram_bot; docker rm takispravy_telegram_bot
+----
+
+== Configuration parameters
+
+Following environment variable are avaiable for global service configuration:
+
+TAKISPRAVY_TELEGRAM_AUTH_TOKEN - telegram authentication token
+
+MONGO_DATABASE_NAME - mongodb database name to use (default is takispravy)
+
+MONGO_AUTH_DATABASE_NAME - mongodb database name used for authentication (default is admin)
+
+MONGO_HOST - host of mongodb instance (default is takispravy_mongo)
+
+MONGO_PORT - port of mongodb instance (default is 27017)
+
+MONGO_USERNAME - username for authentication to mongodb (default is telegramBotService)
+
+MONGO_PASSWORD - password for authentication to mongodb
+
+GET_UPDATES_DELAY - delay for getting updates from Telegram API (default is 10sec)
+
+ROOT_LOG_LEVEL - logging level for third-party libraries (default is INFO)
+
+TAKISPRAVY_LOG_LEVEL - logging level for service code (default is INFO)
+
+== Start service
+
+[source,shell]
+----
+docker pull takispravy/takispravy-telegram-bot:$TAG
+docker run -dit --name takispravy_telegram_bot --link takispravy_mongo -e TAKISPRAVY_TELEGRAM_AUTH_TOKEN=$TAKISPRAVY_TELEGRAM_AUTH_TOKEN -e MONGO_PASSWORD=$MONGO_PASSWORD -v /logs:/logs -p 8080:8080 takispravy/takispravy-telegram-bot:$TAG
+----
