@@ -2,7 +2,7 @@
 
 Interface for interaction with Telegram Bot API.
 
-TravisCI - https://travis-ci.org/takispravy/takispravy-telegram-bot/
+TravisCI - image:https://travis-ci.org/takispravy/takispravy-telegram-bot.svg?branch=develop["Build Status", link="https://travis-ci.org/takispravy/takispravy-telegram-bot"]
 
 DockerHub - https://hub.docker.com/r/takispravy/takispravy-telegram-bot/
 

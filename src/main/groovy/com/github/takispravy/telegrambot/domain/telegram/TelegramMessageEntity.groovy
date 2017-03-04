@@ -1,4 +1,4 @@
-package com.github.takispravy.telegrambot.domain
+package com.github.takispravy.telegrambot.domain.telegram
 
 import groovy.transform.builder.Builder
 

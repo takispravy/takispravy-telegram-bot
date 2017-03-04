@@ -1,7 +1,7 @@
 package com.github.takispravy.telegrambot.service
 
-import com.github.takispravy.telegrambot.domain.TelegramApiUpdate
-import com.github.takispravy.telegrambot.repository.TelegramApiUpdateRepository
+import com.github.takispravy.telegrambot.domain.telegram.TelegramApiUpdate
+import com.github.takispravy.telegrambot.repository.telegram.TelegramApiUpdateRepository
 import groovy.util.logging.Slf4j
 import org.joda.time.format.PeriodFormatter
 import org.joda.time.format.PeriodFormatterBuilder
@@ -13,8 +13,6 @@ import org.springframework.scheduling.TaskScheduler
 import org.springframework.stereotype.Service
 
 import javax.annotation.PostConstruct
-
-import static java.lang.Math.max
 
 @Scope('singleton')
 @Service
@@ -38,6 +36,9 @@ class TelegramApiUpdatesService {
     @Autowired
     TaskScheduler taskScheduler
 
+    @Autowired
+    MessageListenersService messageListenersService
+
     Long lastIngestedUpdateId
 
     @PostConstruct
@@ -58,8 +59,9 @@ class TelegramApiUpdatesService {
 
         log.info "Received ${newUpdates.size()} new updates" + (!newUpdates.empty ? ', saving it to database' : '') + '...'
         telegramApiUpdateRepository.save newUpdates
+        messageListenersService.notifyAllListenersAbout newUpdates
 
-        lastIngestedUpdateId = max(lastIngestedUpdateId, newUpdates.collect({ it.updateId }).max() ?: 0)
+        lastIngestedUpdateId = newUpdates.collect({ it.updateId }).plus(lastIngestedUpdateId).max()
     }
 
     static long fromDurationString(String durationAsString) {
