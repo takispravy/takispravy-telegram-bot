@@ -1,16 +1,14 @@
 package com.github.takispravy.telegrambot.service
 
-import com.github.takispravy.telegrambot.domain.TelegramApiUpdate
-import com.github.takispravy.telegrambot.domain.TelegramChat
-import com.github.takispravy.telegrambot.domain.TelegramMessage
-import com.github.takispravy.telegrambot.domain.TelegramMessageEntity
-import com.github.takispravy.telegrambot.domain.TelegramUser
+import com.github.takispravy.telegrambot.domain.telegram.TelegramApiUpdate
+import com.github.takispravy.telegrambot.domain.telegram.TelegramChat
+import com.github.takispravy.telegrambot.domain.telegram.TelegramMessage
+import com.github.takispravy.telegrambot.domain.telegram.TelegramMessageEntity
+import com.github.takispravy.telegrambot.domain.telegram.TelegramUser
 import groovy.util.logging.Slf4j
 import groovyx.net.http.HttpBuilder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-
-import static groovyx.net.http.NativeHandlers.Parsers.json
 
 @Service
 @Slf4j
